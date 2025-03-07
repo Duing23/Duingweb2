@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Saya</title>
+    <style>
+      /* Reset CSS */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Body */
+      body {
+        font-family: "Arial", sans-serif;
+        text-align: center;
+        background-image: url("Latar.jpg");
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: -1;
+      }
+
+      /* Header */
+      header {
+        margin-bottom: 20px;
+      }
+
+      .logo {
+        position: relative;
+        top: -10px;
+      }
+
+      .logo img {
+        width: 80%;
+        max-width: 400px;
+        height: auto;
+        object-fit: contain;
+        margin-bottom: 60px;
+        border-radius: 10px;
+        box-shadow: 0 0 0px rgba(0, 255, 255, 0.1);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .logo img:hover {
+        transform: scale(1.2);
+        box-shadow: 0 0 0px rgb(0, 0, 0);
+      }
+
+      h1 {
+        font-size: 3rem;
+        font-family: "Verdana", Arial, Helvetica, sans-serif;
+        margin-top: -20px; /* Menambahkan jarak ke atas */
+        margin-bottom: 20px;
+      }
+
+      .explanation {
+        font-size: 1.2rem;
+        color: #fff;
+        line-height: 1.6;
+        font-style: italic;
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .social-icons {
+        margin-top: 50px;
+      }
+
+      .icon-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .social-icon {
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.3s ease;
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 10px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+      }
+
+      .social-icon:hover {
+        transform: scale(1.3);
+        filter: brightness(1.3);
+        box-shadow: 0 0 30px rgba(0, 225, 255, 0.8);
+      }
+
+      /* Overlay YouTube */
+      #youtube-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(95, 95, 95, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .overlay-content {
+        background-color: #fff;
+        color: #000;
+        padding: 30px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 600px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        transform: scale(1.1);
+        animation: slideIn 0.5s ease-out forwards;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .overlay-content h2 {
+        text-align: center;
+        font-size: 1.5rem;
+        color: #373737a3;
+        margin-bottom: 20px;
+      }
+
+      .overlay-content ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .overlay-content li {
+        padding: 12px;
+        text-align: center;
+        background-color: #00bfff;
+        color: white;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .overlay-content li:hover {
+        background-color: #007bb5;
+        transform: scale(1.05);
+      }
+
+      .overlay-content button {
+        width: 100%;
+        padding: 12px;
+        background-color: #00bfff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .overlay-content button:hover {
+        background-color: #007bb5;
+      }
+
+      /* Overlay TikTok */
+      #tiktok-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(95, 95, 95, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      footer {
+        font-size: 1.2rem;
+        margin-top: 30px;
+        padding: 10px;
+        z-index: 1;
+      }
+
+      /* Media Queries for Responsiveness */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        .logo img {
+          width: 70%;
+        }
+
+        .icon-container {
+          gap: 20px;
+        }
+
+        .social-icon {
+          width: 70px;
+          height: 70px;
+        }
+
+        .explanation {
+          font-size: 1rem;
+        }
+
+        .overlay-content {
+          width: 90%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        .logo img {
+          width: 60%;
+        }
+
+        .icon-container {
+          gap: 15px;
+        }
+
+        .social-icon {
+          width: 60px;
+          height: 60px;
+        }
+
+        .explanation {
+          font-size: 0.9rem;
+        }
+
+        .overlay-content {
+          width: 90%;
+          padding: 20px;
+        }
+
+        footer {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="Duing.png" alt="Logo Duing" />
+      </div>
+      <h1>DUING</h1>
+      <div class="explanation">
+        <p>
+          Ikon di bawah ini mengarah ke akun sosial media saya, klik ikon
+          YouTube untuk melihat video yang saya unggah <br />
+          atau klik ikon TikTok untuk menonton video saya di TikTok.
+        </p>
+      </div>
+    </header>
+
+    <section class="social-icons">
+      <div class="icon-container">
+        <img src="Yt.webp" alt="YouTube" class="social-icon" id="youtube" />
+        <img src="tiktok.webp" alt="TikTok" class="social-icon" id="tiktok" />
+      </div>
+    </section>
+
+    <!-- Overlay YouTube -->
+    <div id="youtube-overlay" class="overlay">
+      <div class="overlay-content">
+        <h2>Pilih Video YouTube</h2>
+        <ul>
+          <li
+            onclick="window.open('https://youtu.be/7oNfFghU19g?si=iPmB0wJsqcuOlX2o')"
+          >
+            iPhone 13 Test Free Fire
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/nWWLKgVYfB4?si=cjsjRfHJUS_JqVtW')"
+          >
+            iPhone 13 Test Mobile Legends
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/FYJqdwPbH4o?si=vsWcoVyfIearAT2q')"
+          >
+            iPhone 13 Test PUBG
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/v5aoxrJVVmY?si=jjDydlkgu_UDwzIb')"
+          >
+            iPhone 11 Test Free Fire
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/7oVTMGG0XAQ?si=OJU1w4IJDJ5rAgn8')"
+          >
+            iPhone 11 Test Mobile Legends
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/7_9XhKqRylM?si=YE2sr6Hs3g94MBUo')"
+          >
+            Tecno Pova 4 Test PUBG
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/D-_bDp9KsCQ?si=cjA4_g3aDQlPykl5')"
+          >
+            Poco X6 Pro Test Free Fire
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/mcTqVAiXrfc?si=aTAYgabAnQN8Dvlp')"
+          >
+            Poco X6 Pro Test Mobile Legends
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/J87t9rfMFm0?si=ew3UzmkIqYX1Dex9')"
+          >
+            Poco X6 Pro Test PUBG
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/oHcR6FQ1G28?si=v1RXSH9yJD1pHukq')"
+          >
+            Tecno Pova 6 Test Free Fire
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/dHfBtVGwB-I?si=qCldM7OK_U54bh9D')"
+          >
+            iPhone XR Test Free Fire
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/Y9nz5fvkarA?si=P5VjuZf8SYHOjmQS')"
+          >
+            iPhone XR Test Mobile Legends
+          </li>
+          <li
+            onclick="window.open('https://youtu.be/bMQHw4KVSFw?si=xejjfyQKhj47EP2m')"
+          >
+            iPhone XR Test PUBG
+          </li>
+        </ul>
+        <button onclick="closeOverlay('youtube-overlay')">Tutup</button>
+      </div>
+    </div>
+
+    <!-- Overlay TikTok -->
+    <div id="tiktok-overlay" class="overlay">
+      <div class="overlay-content">
+        <h2>TikTok</h2>
+        <button
+          onclick="window.location.href='https://www.tiktok.com/@duingg23?_r=1&_d=eg157mce3dlgfg&sec_uid=MS4wLjABAAAAmoyuKjkmZpONY1fxxjpCRWUXbrMS4OuCqJPSAlD07qJ-Cq_6gU7lppe6S9g7HAZs&share_author_id=7237331433542730758&sharer_language=id&source=h5_t&u_code=e85hkd8l8380h8&ug_btm=b8727,b0&social_share_type=4&utm_source=copy&sec_user_id=MS4wLjABAAAAmoyuKjkmZpONY1fxxjpCRWUXbrMS4OuCqJPSAlD07qJ-Cq_6gU7lppe6S9g7HAZs&tt_from=copy&utm_medium=ios&utm_campaign=client_share&enable_checksum=1&user_id=7237331433542730758&share_link_id=2B5C2EF5-C358-47D0-93BF-6CACAF789911&share_app_id=1180';"
+        >
+          Lanjutkan ke TikTok
+        </button>
+        <button onclick="closeOverlay('tiktok-overlay')">Tutup</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>Terimakasih telah mengunjungi website saya!</p>
+    </footer>
+
+    <script>
+      // Fungsi untuk membuka overlay YouTube
+      document.getElementById("youtube").onclick = function () {
+        document.getElementById("youtube-overlay").style.display = "flex";
+        setTimeout(() => {
+          document.getElementById("youtube-overlay").style.opacity = "1";
+        }, 10);
+      };
+
+      // Fungsi untuk membuka overlay TikTok
+      document.getElementById("tiktok").onclick = function () {
+        document.getElementById("tiktok-overlay").style.display = "flex";
+        setTimeout(() => {
+          document.getElementById("tiktok-overlay").style.opacity = "1";
+        }, 10);
+      };
+
+      // Fungsi untuk menutup overlay
+      function closeOverlay(overlayId) {
+        document.getElementById(overlayId).style.opacity = "0";
+        setTimeout(() => {
+          document.getElementById(overlayId).style.display = "none";
+        }, 500);
+      }
+
+      // Reset overlay ketika halaman dimuat
+      window.onload = function () {
+        document.getElementById("youtube-overlay").style.display = "none";
+        document.getElementById("tiktok-overlay").style.display = "none";
+      };
+    </script>
+  </body>
+</html>
